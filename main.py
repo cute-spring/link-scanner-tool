@@ -10,7 +10,7 @@ from urllib3.poolmanager import PoolManager
 from lxml import etree
 from PyQt5.QtWidgets import (
     QApplication, QMainWindow, QTableWidget, QTableWidgetItem,
-    QVBoxLayout, QPushButton, QFileDialog, QWidget, QHBoxLayout, QLabel, QHeaderView, QLineEdit, QComboBox
+    QVBoxLayout, QPushButton, QFileDialog, QWidget, QHBoxLayout, QLabel, QHeaderView, QLineEdit, QComboBox, QInputDialog
 )
 from PyQt5.QtCore import Qt
 from docx import Document
@@ -72,6 +72,9 @@ class LinkScannerApp(QMainWindow):
         self.export_button = QPushButton("导出为 Excel")  # 导出按钮
         self.export_button.clicked.connect(self.export_to_excel)  # 点击导出按钮执行导出
 
+        self.replace_button = QPushButton("替换链接地址")  # 替换链接按钮
+        self.replace_button.clicked.connect(self.replace_links)  # 点击替换按钮时执行替换操作
+
         self.status_label = QLabel("状态: 等待操作")  # 状态标签
         self.status_label.setAlignment(Qt.AlignLeft)  # 设置左对齐
 
@@ -83,6 +86,7 @@ class LinkScannerApp(QMainWindow):
         button_layout = QHBoxLayout()
         button_layout.addWidget(self.scan_button)  # 添加扫描按钮
         button_layout.addWidget(self.export_button)  # 添加导出按钮
+        button_layout.addWidget(self.replace_button)  # 添加替换按钮
 
         layout = QVBoxLayout()
         layout.addLayout(domain_layout)  # 添加域名输入布局
@@ -312,6 +316,45 @@ class LinkScannerApp(QMainWindow):
         except Exception as e:
             self.status_label.setText(f"状态: 导出 Excel 文件时发生错误: {e}")  # 更新状态信息
             logging.error(f"Error exporting to Excel: {e}")  # 日志记录导出错误
+
+    def replace_links(self):
+        prefix, ok = QInputDialog.getText(self, "输入目标系统的地址前缀", "请输入目标系统的地址前缀:")
+        if ok and prefix:  # 用户确认并输入不为空
+            for row in range(self.table.rowCount()):
+                # 获取当前链接URL的单元格
+                current_url_item = self.table.item(row, 1)
+                if current_url_item and current_url_item.text():  # 确保当前单元格非空
+                    original_url = current_url_item.text()  # 获取原始链接
+                    # 生成新的链接
+                    new_url = f"{prefix}{original_url}"
+
+                    # 获取文档路径
+                    doc_path = self.scanned_data[row]["文档路径"]
+                    # 创建一个新的文档并替换链接
+                    new_doc_path = os.path.splitext(doc_path)[0] + "_modified.docx"  # 新文件名
+                    new_document = Document(doc_path)  # 加载原始文档
+
+                    # 遍历文档中的每一个段落
+                    for paragraph in new_document.paragraphs:
+                        for run in paragraph.runs:
+                            # 替换文本中的原始链接
+                            if original_url in run.text:
+                                run.text = run.text.replace(original_url, new_url)
+
+                    # 如果有超链接，需要使用 lxml 来处理
+                    for rel in new_document.part.rels.values():
+                        if "hyperlink" in rel.target_ref:
+                            if original_url in rel.target:
+                                rel.target = new_url  # 替换超链接的目标
+
+                    # 保存修改后的新文档
+                    new_document.save(new_doc_path)
+
+            self.status_label.setText("状态: 链接地址已替换，修改后的文档已生成")  # 更新状态信息
+            logging.info("Links replaced and new documents created successfully.")  # 日志记录替换成功
+        else:
+            self.status_label.setText("状态: 替换操作被取消或无效的前缀")  # 更新状态信息
+            logging.warning("Link replacement was cancelled or invalid prefix entered.")  # 日志记录替换操作被取消
 
 if __name__ == "__main__":
     logging.info("Application started.")  # 日志记录应用启动

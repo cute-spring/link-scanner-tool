@@ -1,0 +1,32 @@
+2024-11-27 17:14:13,684 - INFO - Application started.
+2024-11-27 17:14:13,807 - INFO - Application initialized successfully.
+2024-11-27 17:14:13,807 - INFO - Temporary download directory created at /var/folders/hn/t3srqb9n2mz_l3l_881hpxth0000gp/T/link_scanner_mjj44k7l
+2024-11-27 17:14:23,151 - INFO - Starting scan for 1 file(s).
+2024-11-27 17:14:23,151 - INFO - Parsing document: /Users/gavinzhang/Desktop/folder1/main_document_with_links.docx
+2024-11-27 17:14:23,153 - DEBUG - Extracted: URL=http://www.lib.bnu.edu.cn/docs/2022-10/68af7dde5c844033adb0238e1b316985.pdf, Label=新书书展完整书单（2022年10月）
+2024-11-27 17:14:23,153 - DEBUG - Extracted: URL=https://www.cas.cn/gzzd/ggsw/gwyda/202108/P020210827414413486902.pdf, Label=中国科学院电子文件
+2024-11-27 17:14:23,154 - DEBUG - Extracted: URL=https://www.sz.gov.cn/attachment/1/1374/1374945/10940252.pdf, Label=电子印章
+2024-11-27 17:14:23,162 - INFO - Downloading file from URL: http://www.lib.bnu.edu.cn/docs/2022-10/68af7dde5c844033adb0238e1b316985.pdf (Attempt 1)
+2024-11-27 17:14:23,165 - DEBUG - Starting new HTTP connection (1): 127.0.0.1:7897
+2024-11-27 17:14:23,640 - DEBUG - http://127.0.0.1:7897 "GET http://www.lib.bnu.edu.cn/docs/2022-10/68af7dde5c844033adb0238e1b316985.pdf HTTP/11" 200 432876
+2024-11-27 17:14:24,706 - INFO - File downloaded: /var/folders/hn/t3srqb9n2mz_l3l_881hpxth0000gp/T/link_scanner_mjj44k7l/68af7dde5c844033adb0238e1b316985.pdf
+2024-11-27 17:14:24,706 - INFO - Computing MD5 hash for file: /var/folders/hn/t3srqb9n2mz_l3l_881hpxth0000gp/T/link_scanner_mjj44k7l/68af7dde5c844033adb0238e1b316985.pdf
+2024-11-27 17:14:24,709 - INFO - MD5 hash for /var/folders/hn/t3srqb9n2mz_l3l_881hpxth0000gp/T/link_scanner_mjj44k7l/68af7dde5c844033adb0238e1b316985.pdf: 7f215925569cad151d9ec3a256102ddc
+2024-11-27 17:14:24,727 - INFO - Downloading file from URL: https://www.cas.cn/gzzd/ggsw/gwyda/202108/P020210827414413486902.pdf (Attempt 1)
+2024-11-27 17:14:24,728 - DEBUG - Starting new HTTPS connection (1): www.cas.cn:443
+2024-11-27 17:14:25,504 - DEBUG - https://www.cas.cn:443 "GET /gzzd/ggsw/gwyda/202108/P020210827414413486902.pdf HTTP/11" 200 411888
+2024-11-27 17:14:26,288 - INFO - File downloaded: /var/folders/hn/t3srqb9n2mz_l3l_881hpxth0000gp/T/link_scanner_mjj44k7l/P020210827414413486902.pdf
+2024-11-27 17:14:26,289 - INFO - Computing MD5 hash for file: /var/folders/hn/t3srqb9n2mz_l3l_881hpxth0000gp/T/link_scanner_mjj44k7l/P020210827414413486902.pdf
+2024-11-27 17:14:26,291 - INFO - MD5 hash for /var/folders/hn/t3srqb9n2mz_l3l_881hpxth0000gp/T/link_scanner_mjj44k7l/P020210827414413486902.pdf: 6b9c6e50ceb50e0552c10918914c8831
+2024-11-27 17:14:26,310 - INFO - Downloading file from URL: https://www.sz.gov.cn/attachment/1/1374/1374945/10940252.pdf (Attempt 1)
+2024-11-27 17:14:26,311 - DEBUG - Starting new HTTPS connection (1): www.sz.gov.cn:443
+2024-11-27 17:14:26,723 - WARNING - Error downloading file from https://www.sz.gov.cn/attachment/1/1374/1374945/10940252.pdf: HTTPSConnectionPool(host='www.sz.gov.cn', port=443): Max retries exceeded with url: /attachment/1/1374/1374945/10940252.pdf (Caused by SSLError(SSLError(1, '[SSL: BAD_ECPOINT] bad ecpoint (_ssl.c:1000)'))). Retrying...
+2024-11-27 17:14:26,724 - INFO - Downloading file from URL: https://www.sz.gov.cn/attachment/1/1374/1374945/10940252.pdf (Attempt 2)
+2024-11-27 17:14:26,725 - DEBUG - Starting new HTTPS connection (2): www.sz.gov.cn:443
+2024-11-27 17:14:27,501 - WARNING - Error downloading file from https://www.sz.gov.cn/attachment/1/1374/1374945/10940252.pdf: HTTPSConnectionPool(host='www.sz.gov.cn', port=443): Max retries exceeded with url: /attachment/1/1374/1374945/10940252.pdf (Caused by SSLError(SSLError(1, '[SSL: BAD_ECPOINT] bad ecpoint (_ssl.c:1000)'))). Retrying...
+2024-11-27 17:14:27,501 - INFO - Downloading file from URL: https://www.sz.gov.cn/attachment/1/1374/1374945/10940252.pdf (Attempt 3)
+2024-11-27 17:14:27,503 - DEBUG - Starting new HTTPS connection (3): www.sz.gov.cn:443
+2024-11-27 17:14:27,899 - WARNING - Error downloading file from https://www.sz.gov.cn/attachment/1/1374/1374945/10940252.pdf: HTTPSConnectionPool(host='www.sz.gov.cn', port=443): Max retries exceeded with url: /attachment/1/1374/1374945/10940252.pdf (Caused by SSLError(SSLError(1, '[SSL: BAD_ECPOINT] bad ecpoint (_ssl.c:1000)'))). Retrying...
+2024-11-27 17:14:27,900 - ERROR - Failed to download file from https://www.sz.gov.cn/attachment/1/1374/1374945/10940252.pdf after 3 attempts.
+2024-11-27 17:14:27,902 - INFO - File /Users/gavinzhang/Desktop/folder1/main_document_with_links.docx scanned successfully: 3 links extracted.
+2024-11-27 17:14:40,247 - INFO - Exported scan results to /Users/gavinzhang/Desktop/folder1/b.xlsx.
